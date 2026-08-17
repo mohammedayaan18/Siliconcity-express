@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiliconCity Express | Shipping Made Simple</title>
+  <meta name="description" content="SiliconCity Express - reliable shipping and real-time shipment visibility.">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#102018;background:#f7faf8;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+    header{position:absolute;top:0;left:0;width:100%;z-index:10;color:#fff}
+    nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .logo-mark{width:38px;height:38px;border:2px solid rgba(255,255,255,.9);border-radius:11px;display:grid;place-items:center;font-size:13px}
+    .nav-links{display:flex;align-items:center;gap:26px;font-size:14px}
+    .nav-links a{opacity:.9;transition:.2s}
+    .nav-links a:hover{opacity:1;color:#9dffb0}
+    .nav-cta{padding:10px 17px;border:1px solid rgba(255,255,255,.35);border-radius:10px}
+    .menu{display:none;background:none;border:0;color:#fff;font-size:27px}
+    .hero{min-height:700px;position:relative;display:flex;align-items:center;color:#fff;overflow:hidden;background:
+      radial-gradient(circle at 80% 25%,rgba(50,211,91,.24),transparent 28%),
+      linear-gradient(115deg,#07170f 0%,#0b2819 48%,#123d25 100%)}
+    .hero:after{content:"";position:absolute;inset:0;background:
+      linear-gradient(90deg,rgba(3,13,8,.96) 0%,rgba(3,13,8,.76) 48%,rgba(3,13,8,.25) 100%)}
+    .hero-art{position:absolute;right:-80px;bottom:-80px;width:58%;height:75%;opacity:.9;
+      background:
+      radial-gradient(ellipse at 48% 48%,rgba(255,255,255,.16) 0 18%,transparent 19%),
+      linear-gradient(145deg,transparent 25%,rgba(255,255,255,.08) 26% 55%,transparent 56%),
+      linear-gradient(25deg,transparent 36%,rgba(45,210,90,.2) 37% 64%,transparent 65%);
+      transform:skewX(-7deg)}
+    .hero .container{position:relative;z-index:2}
+    .hero-content{max-width:650px;padding-top:55px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#a6ffb6;font-weight:700;font-size:13px;margin-bottom:18px}
+    .dot{width:7px;height:7px;border-radius:50%;background:#65ef83;box-shadow:0 0 0 5px rgba(101,239,131,.12)}
+    h1{font-size:clamp(42px,6vw,72px);line-height:1.02;letter-spacing:-2.5px;margin-bottom:20px}
+    .hero p{max-width:570px;color:#d4e0d8;font-size:18px;margin-bottom:30px}
+    .tracking-card{width:min(650px,100%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);padding:18px;border-radius:16px}
+    .track-title{font-size:14px;font-weight:700;margin-bottom:10px}
+    .track-row{display:flex;gap:10px}
+    .track-row input{flex:1;min-width:0;border:0;outline:0;border-radius:10px;padding:14px 15px;background:#fff;color:#16231b}
+    .btn{border:0;border-radius:10px;padding:13px 19px;font-weight:750;cursor:pointer;transition:.2s}
+    .btn-primary{background:#62e77d;color:#06200e}
+    .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.04)}
+    .btn-light{background:#fff;color:#102018}
+    .hero-links{display:flex;gap:22px;margin-top:15px;font-size:14px}
+    .hero-links a{color:#dce8df;text-decoration:underline;text-underline-offset:4px}
+    .result{display:none;margin-top:13px;background:#fff;color:#17301f;border-radius:12px;padding:15px}
+    .result.show{display:block}
+    .result strong{display:block;margin-bottom:3px}
+    .result small{color:#64746a}
+    section{padding:85px 0}
+    .stats{background:#fff;border-bottom:1px solid #e5ece7}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+    .stat strong{font-size:31px;display:block;color:#123c23}
+    .stat span{font-size:13px;color:#68766d}
+    .section-head{text-align:center;max-width:650px;margin:0 auto 45px}
+    .section-head span{color:#209343;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.5px}
+    .section-head h2{font-size:clamp(30px,4vw,45px);line-height:1.1;margin:8px 0 12px;letter-spacing:-1px}
+    .section-head p{color:#68766d}
+    .services{background:#f7faf8}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{background:#fff;border:1px solid #e4ebe6;border-radius:17px;padding:25px;transition:.25s}
+    .card:hover{transform:translateY(-5px);box-shadow:0 14px 35px rgba(17,48,29,.08)}
+    .icon{width:45px;height:45px;border-radius:12px;background:#e9f9ed;display:grid;place-items:center;font-size:21px;margin-bottom:18px}
+    .card h3{font-size:17px;margin-bottom:8px}
+    .card p{font-size:14px;color:#68766d}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .step{position:relative}
+    .number{font-size:13px;font-weight:800;color:#209343;margin-bottom:12px}
+    .step h3{margin-bottom:6px}
+    .step p{font-size:14px;color:#68766d}
+    .cta{padding:70px 0;background:#0a2415;color:#fff}
+    .cta-box{display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .cta h2{font-size:clamp(28px,4vw,42px);line-height:1.1;margin-bottom:8px}
+    .cta p{color:#bdd0c2}
+    footer{background:#06130b;color:#b8c7bd;padding:50px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+    footer .logo{color:#fff;margin-bottom:12px}
+    footer p{font-size:13px;max-width:290px}
+    footer h4{color:#fff;margin-bottom:12px}
+    footer a{display:block;font-size:13px;margin:7px 0}
+    footer a:hover{color:#9dffb0}
+    .copyright{border-top:1px solid #1a3021;margin-top:35px;padding-top:18px;font-size:12px}
+    @media(max-width:850px){
+      .nav-links{display:none;position:absolute;top:70px;left:4%;right:4%;padding:18px;background:#0b2416;border:1px solid rgba(255,255,255,.12);border-radius:14px;flex-direction:column;align-items:stretch;gap:0}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:11px 8px}
+      .nav-cta{text-align:center}
+      .menu{display:block}
+      .hero{min-height:720px}
+      .hero-art{width:100%;opacity:.35;right:-180px}
+      .stats-grid,.cards,.steps{grid-template-columns:repeat(2,1fr)}
+      .cta-box{flex-direction:column;align-items:flex-start}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:560px){
+      nav{height:68px}
+      .hero-content{padding-top:50px}
+      h1{letter-spacing:-1.5px}
+      .hero p{font-size:16px}
+      .track-row{flex-direction:column}
+      .track-row .btn{width:100%}
+      .hero-links{flex-direction:column;gap:8px}
+      section{padding:65px 0}
+      .stats-grid,.cards,.steps{grid-template-columns:1fr 1fr;gap:12px}
+      .stat strong{font-size:25px}
+      .card{padding:19px}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#">
+        <span class="logo-mark">SCE</span>
+        <span>SiliconCity Express</span>
+      </a>
+      <button class="menu" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#track">Track</a>
+        <a href="#services">Services</a>
+        <a href="#how">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="#track" class="nav-cta">Sign in</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-art"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="dot"></span> SHIPPING THAT MOVES WITH YOU</div>
+        <h1>Shipping made simple. Visibility made smarter.</h1>
+        <p>Move packages with confidence, from pickup to doorstep. Get reliable delivery and clear shipment visibility in one place.</p>
+
+        <div class="tracking-card" id="track">
+          <div class="track-title">Track your shipment</div>
+          <div class="track-row">
+            <input id="trackingInput" type="text" placeholder="Enter tracking number" aria-label="Tracking number">
+            <button class="btn btn-primary" onclick="trackPackage()">Track Shipment</button>
+          </div>
+          <div class="result" id="result"></div>
+        </div>
+
+        <div class="hero-links">
+          <a href="#contact">Get a Shipping Quote →</a>
+          <a href="#services">Explore Services →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat"><strong>50K+</strong><span>Shipments Delivered</span></div>
+      <div class="stat"><strong>99.2%</strong><span>On-Time Delivery</span></div>
+      <div class="stat"><strong>120+</strong><span>Locations</span></div>
+      <div class="stat"><strong>24/7</strong><span>Support</span></div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <span>Our Services</span>
+        <h2>Everything you need to move smarter.</h2>
+        <p>Simple shipping solutions designed for speed, reliability and visibility.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="icon">⚡</div><h3>Express Delivery</h3><p>Fast and reliable delivery for time-sensitive shipments.</p></article>
+        <article class="card"><div class="icon">🚚</div><h3>Freight Shipping</h3><p>Flexible transportation solutions for larger shipments.</p></article>
+        <article class="card"><div class="icon">🌎</div><h3>Global Shipping</h3><p>Reliable shipping solutions for destinations near and far.</p></article>
+        <article class="card"><div class="icon">📍</div><h3>Real-Time Tracking</h3><p>Stay informed from pickup through final delivery.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="container">
+      <div class="section-head">
+        <span>How It Works</span>
+        <h2>Four simple steps. Zero confusion.</h2>
+        <p>From booking to doorstep, your shipment stays easy to follow.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="number">01</div><h3>Book</h3><p>Create your shipment and choose the service you need.</p></div>
+        <div class="step"><div class="number">02</div><h3>Pickup</h3><p>Our delivery team collects your package.</p></div>
+        <div class="step"><div class="number">03</div><h3>Track</h3><p>Follow your shipment and stay updated along the way.</p></div>
+        <div class="step"><div class="number">04</div><h3>Delivered</h3><p>Your package reaches its destination safely.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="container cta-box">
+      <div>
+        <h2>Ready to move your shipment?</h2>
+        <p>Get reliable delivery with complete shipment visibility.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:hello@siliconcityexpress.com">Get a Quote</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><span class="logo-mark">SCE</span><span>SiliconCity Express</span></div>
+        <p>Reliable shipping, simple tracking and better visibility from pickup to doorstep.</p>
+      </div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+      <div><h4>Support</h4><a href="#track">Track Shipment</a><a href="#">Help Center</a><a href="#">Locations</a></div>
+      <div><h4>Connect</h4><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+    </div>
+    <div class="copyright">© 2026 SiliconCity Express. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu(){
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  function trackPackage(){
+    const input=document.getElementById('trackingInput');
+    const result=document.getElementById('result');
+    const value=input.value.trim();
+
+    if(!value){
+      result.innerHTML='<strong>Enter a tracking number</strong><small>Please enter your shipment number to continue.</small>';
+    }else{
+      result.innerHTML='<strong>Shipment '+escapeHtml(value)+' found</strong><small>Demo status: In transit · Expected delivery soon.</small>';
+    }
+    result.classList.add('show');
+  }
+
+  function escapeHtml(text){
+    const div=document.createElement('div');
+    div.textContent=text;
+    return div.innerHTML;
+  }
+
+  document.getElementById('trackingInput').addEventListener('keydown',function(e){
+    if(e.key==='Enter') trackPackage();
+  });
+</script>
+</body>
+</html>
